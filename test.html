@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MINDMATE 2.0 In-Browser Test Suite</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body { padding: 40px 20px; max-width: 900px; margin: auto; background: #F8F9FA; font-family: system-ui, sans-serif; }
+    .test-card { background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 16px; padding: 20px; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
+    .test-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .test-result { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-bottom: 1px solid #F1F5F9; font-size: 15px; }
+    .test-pass { color: #16A34A; font-weight: 700; }
+    .test-fail { color: #DC2626; font-weight: 700; }
+    .summary-badge { padding: 6px 14px; border-radius: 999px; font-weight: 800; font-size: 16px; }
+    .summary-pass { background: #DCFCE7; color: #15803D; }
+    .summary-fail { background: #FEE2E2; color: #B91C1C; }
+  </style>
+</head>
+<body>
+
+  <div class="test-header">
+    <div>
+      <h1>🧪 MINDMATE 2.0 Automated In-Browser Verification</h1>
+      <p style="color: #64748B;">Live integration tests exercising real IndexedDB, Adaptive AI, Reminders, and Voice systems.</p>
+    </div>
+    <a href="index.html" class="btn secondary">← Back to App</a>
+  </div>
+
+  <div id="testSummary" class="test-card" style="display: flex; justify-content: space-between; align-items: center;">
+    <div><strong>Running test suite...</strong></div>
+    <span id="summaryBadge" class="summary-badge">Running</span>
+  </div>
+
+  <div class="test-card">
+    <h2>1. Adaptive AI & Baseline Tests</h2>
+    <div id="aiTestLog"></div>
+  </div>
+
+  <div class="test-card">
+    <h2>2. Reminder Engine Lifecycle & Adherence Tests</h2>
+    <div id="reminderTestLog"></div>
+  </div>
+
+  <div class="test-card">
+    <h2>3. Offline Storage & Synchronization Queue Tests</h2>
+    <div id="storageTestLog"></div>
+  </div>
+
+  <div class="test-card">
+    <h2>4. Voice Command Priority & Localization Tests</h2>
+    <div id="voiceTestLog"></div>
+  </div>
+
+  <div class="test-card">
+    <h2>5. Role-Based Access Control (RBAC) & Security Tests</h2>
+    <div id="rbacTestLog"></div>
+  </div>
+
+  <script type="module">
+    import { put, get, all, clearStore, uid } from './js/storage.js';
+    import { baseline, allBaselines, recommend, recordAttempt, DOMAINS } from './js/adaptive-engine.js';
+    import { addReminder, setReminderStatus, calculateAdherence, REMINDER_STATES } from './js/reminder-engine.js';
+    import { queueCount, syncNow, setOfflineSimulation } from './js/sync-queue.js';
+    import { VOICE_COMMAND_REGISTRY, executeVoiceCommand } from './js/voice-assistant.js';
+    import { authenticateRole, canAccess, ROLES } from './js/auth-rbac.js';
+
+    let passCount = 0;
+    let failCount = 0;
+
+    function recordTest(containerId, name, condition, details = '') {
+      const host = document.getElementById(containerId);
+      const row = document.createElement('div');
+      row.className = 'test-result';
+
+      const label = document.createElement('span');
+      label.textContent = name + (details ? ` (${details})` : '');
+
+      const status = document.createElement('span');
+      if (condition) {
+        status.className = 'test-pass';
+        status.textContent = '✓ PASS';
+        passCount++;
+      } else {
+        status.className = 'test-fail';
+        status.textContent = '✕ FAIL';
+        failCount++;
+      }
+
+      row.append(label, status);
+      if (host) host.appendChild(row);
+    }
+
+    async function runAll() {
+      // 1. Adaptive AI Tests
+      const bEmpty = await baseline('memory');
+      recordTest('aiTestLog', 'Insufficient Data Protection when < 3 sessions', !bEmpty.established && bEmpty.score === null);
+
+      // Record 3 test sessions
+      await recordAttempt({ category: 'memory', difficulty: 2, accuracy: 1.0, responseTimeMs: 1900, retries: 0 });
+      await recordAttempt({ category: 'memory', difficulty: 2, accuracy: 0.9, responseTimeMs: 2100, retries: 0 });
+      await recordAttempt({ category: 'memory', difficulty: 2, accuracy: 1.0, responseTimeMs: 1800, retries: 0 });
+
+      const bEstablished = await baseline('memory');
+      recordTest('aiTestLog', 'Baseline established after 3+ sessions', bEstablished.established && bEstablished.score >= 0.9);
+
+      const recUp = await recommend('memory');
+      recordTest('aiTestLog', 'Adaptive Engine increases difficulty on strong performance', recUp.difficulty === 3 && recUp.direction === 'increase');
+      recordTest('aiTestLog', 'Explainable AI generates transparent reason string', recUp.reason.length > 15);
+
+      // 2. Reminder Engine Tests
+      const newRem = await addReminder({ title: 'Blood Pressure Tablet', time: '09:00', category: 'medicine' });
+      recordTest('reminderTestLog', 'Reminder added with SCHEDULED state', newRem.status === REMINDER_STATES.SCHEDULED);
+
+      await setReminderStatus(newRem.id, REMINDER_STATES.COMPLETED);
+      const updatedRem = await get('reminders', newRem.id);
+      recordTest('reminderTestLog', 'Reminder transitions to COMPLETED state', updatedRem.status === REMINDER_STATES.COMPLETED);
+
+      const adh = await calculateAdherence('medicine', 30);
+      recordTest('reminderTestLog', 'Adherence calculation returns valid percentage rate', adh.completedRate !== null);
+
+      // 3. Offline Storage & Sync Queue Tests
+      setOfflineSimulation(true);
+      await recordAttempt({ category: 'routine', difficulty: 2, accuracy: 1, responseTimeMs: 2500 });
+      const qOffline = await queueCount();
+      recordTest('storageTestLog', 'Offline mode queues events locally in IndexedDB', qOffline > 0);
+
+      setOfflineSimulation(false);
+      const syncRes = await syncNow();
+      recordTest('storageTestLog', 'Reconnection synchronizes pending queue', syncRes.synced > 0 && syncRes.pending === 0);
+
+      // 4. Voice Command Priority Tests
+      const memoryVoice = await executeVoiceCommand('start my memory game');
+      recordTest('voiceTestLog', '"start memory game" matches memory without generic game intercept', memoryVoice.matchedCommand === 'start_memory_game');
+
+      const journeyVoice = await executeVoiceCommand('start my cognitive journey');
+      recordTest('voiceTestLog', '"start journey" matches cognitive journey', journeyVoice.matchedCommand === 'start_cognitive_journey');
+
+      // 5. RBAC & Security Tests
+      recordTest('rbacTestLog', 'Patient role cannot access Caregiver Dashboard', !canAccess('caregiver', ROLES.PATIENT));
+      recordTest('rbacTestLog', 'Patient role cannot access Health Worker View', !canAccess('healthworker', ROLES.PATIENT));
+
+      const authGood = await authenticateRole(ROLES.CAREGIVER, '1234');
+      recordTest('rbacTestLog', 'Caregiver PIN authentication succeeds with valid credentials', authGood.success);
+
+      const authBad = await authenticateRole(ROLES.HEALTHWORKER, '0000');
+      recordTest('rbacTestLog', 'Health Worker rejects invalid PIN attempt', !authBad.success);
+
+      // Summary
+      const summaryText = document.getElementById('testSummary');
+      const badge = document.getElementById('summaryBadge');
+      if (failCount === 0) {
+        badge.className = 'summary-badge summary-pass';
+        badge.textContent = `All ${passCount} Tests Passed (0 Failures)`;
+      } else {
+        badge.className = 'summary-badge summary-fail';
+        badge.textContent = `${failCount} Failed / ${passCount} Passed`;
+      }
+    }
+
+    runAll().catch(console.error);
+  </script>
+</body>
+</html>

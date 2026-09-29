@@ -1,0 +1,119 @@
+const N8N_AGENT_WEBHOOK_URL = 'https://cmmukund.app.n8n.cloud/webhook/mindmate-agent';
+
+const agentText = {
+  en:{title:'🤖 MINDMATE AI Agent',subtitle:'Your personal MINDMATE agent for cognitive activities, routines, reminders and caregiver support.',placeholder:'Ask MINDMATE something…',send:'Send',thinking:'Thinking…',offline:'Offline mode — local support available',ready:'Ready',connected:'Connected to n8n agent',unavailable:'n8n agent is not reachable. Using local support mode.',welcome:'Hello. I’m your MINDMATE AI Agent. I can help with today’s journey, reminders, progress, routines, and caregiver summaries.',quickJourney:'Plan my journey',quickReminders:'Show my reminders',quickProgress:'How did I do?',quickHelp:'What can you do? ',context:'Use my recent MINDMATE activity',clear:'Clear'},
+  ta:{title:'🤖 MINDMATE AI முகவர்',subtitle:'அறிவாற்றல் செயல்பாடுகள், தினசரி நடைமுறை, நினைவூட்டல்கள் மற்றும் பராமரிப்பு உதவிக்கான உங்கள் தனிப்பட்ட முகவர்.',placeholder:'MINDMATE-ஐ ஏதாவது கேளுங்கள்…',send:'அனுப்பு',thinking:'சிந்திக்கிறது…',offline:'ஆஃப்லைன் — உள்ளூர் உதவி கிடைக்கும்',ready:'தயார்',connected:'n8n முகவருடன் இணைக்கப்பட்டது',unavailable:'n8n முகவர் அணுக முடியவில்லை. உள்ளூர் உதவி பயன்படுத்தப்படுகிறது.',welcome:'வணக்கம். நான் உங்கள் MINDMATE AI முகவர். இன்றைய பயணம், நினைவூட்டல்கள், முன்னேற்றம், நடைமுறைகள் மற்றும் பராமரிப்பாளர் சுருக்கங்களுக்கு உதவுவேன்.',quickJourney:'என் பயணத்தைத் திட்டமிடு',quickReminders:'நினைவூட்டல்களை காட்டு',quickProgress:'எப்படி செயல்பட்டேன்?',quickHelp:'நீ என்ன செய்ய முடியும்?',context:'என் சமீபத்திய MINDMATE செயல்பாட்டைப் பயன்படுத்து',clear:'அழி'},
+  hi:{title:'🤖 MINDMATE AI एजेंट',subtitle:'संज्ञानात्मक गतिविधियों, दिनचर्या, रिमाइंडर और देखभाल सहायता के लिए आपका व्यक्तिगत एजेंट।',placeholder:'MINDMATE से कुछ पूछें…',send:'भेजें',thinking:'सोच रहा है…',offline:'ऑफ़लाइन — स्थानीय सहायता उपलब्ध',ready:'तैयार',connected:'n8n एजेंट से जुड़ा',unavailable:'n8n एजेंट उपलब्ध नहीं है। स्थानीय सहायता का उपयोग किया जा रहा है।',welcome:'नमस्ते। मैं आपका MINDMATE AI एजेंट हूँ। मैं आज की यात्रा, रिमाइंडर, प्रगति, दिनचर्या और देखभालकर्ता सारांश में मदद कर सकता हूँ।',quickJourney:'मेरी यात्रा योजना',quickReminders:'रिमाइंडर दिखाएँ',quickProgress:'मैंने कैसा किया?',quickHelp:'आप क्या कर सकते हैं?',context:'मेरी हाल की MINDMATE गतिविधि उपयोग करें',clear:'साफ़ करें'},
+  ml:{title:'🤖 MINDMATE AI ഏജന്റ്',subtitle:'ബൗദ്ധിക പ്രവർത്തനങ്ങൾ, ദിനചര്യ, ഓർമ്മിപ്പിക്കലുകൾ, പരിചരണ സഹായം എന്നിവയ്ക്കുള്ള നിങ്ങളുടെ വ്യക്തിഗത ഏജന്റ്.',placeholder:'MINDMATE-നോട് ചോദിക്കൂ…',send:'അയയ്ക്കുക',thinking:'ചിന്തിക്കുന്നു…',offline:'ഓഫ്‌ലൈൻ — പ്രാദേശിക സഹായം ലഭ്യമാണ്',ready:'തയ്യാർ',connected:'n8n ഏജന്റുമായി ബന്ധിപ്പിച്ചു',unavailable:'n8n ഏജന്റ് ലഭ്യമല്ല. പ്രാദേശിക സഹായം ഉപയോഗിക്കുന്നു.',welcome:'നമസ്കാരം. ഞാൻ നിങ്ങളുടെ MINDMATE AI ഏജന്റാണ്. ഇന്നത്തെ യാത്ര, ഓർമ്മിപ്പിക്കലുകൾ, പുരോഗതി, ദിനചര്യ, പരിചരണസംക്ഷേപങ്ങൾ എന്നിവയിൽ സഹായിക്കാം.',quickJourney:'എന്റെ യാത്ര പ്ലാൻ ചെയ്യൂ',quickReminders:'ഓർമ്മിപ്പിക്കലുകൾ കാണിക്കൂ',quickProgress:'ഞാൻ എങ്ങനെ ചെയ്തു?',quickHelp:'നിങ്ങൾക്ക് എന്തുചെയ്യാം?',context:'എന്റെ സമീപകാല MINDMATE പ്രവർത്തനം ഉപയോഗിക്കുക',clear:'മായ്ക്കുക'},
+  te:{title:'🤖 MINDMATE AI ఏజెంట్',subtitle:'జ్ఞాపకశక్తి కార్యకలాపాలు, దినచర్యలు, రిమైండర్లు మరియు సంరక్షణ సహాయం కోసం మీ వ్యక్తిగత ఏజెంట్.',placeholder:'MINDMATE ను ఏదైనా అడగండి…',send:'పంపండి',thinking:'ఆలోచిస్తోంది…',offline:'ఆఫ్‌లైన్ — స్థానిక సహాయం అందుబాటులో ఉంది',ready:'సిద్ధం',connected:'n8n ఏజెంట్‌కు కనెక్ట్ అయ్యింది',unavailable:'n8n ఏజెంట్ అందుబాటులో లేదు. స్థానిక సహాయం ఉపయోగిస్తోంది.',welcome:'నమస్తే. నేను మీ MINDMATE AI ఏజెంట్‌ని. ఈరోజు ప్రయాణం, రిమైండర్లు, పురోగతి, దినచర్యలు మరియు సంరక్షణ సారాంశాల్లో సహాయపడగలను.',quickJourney:'నా ప్రయాణాన్ని ప్లాన్ చేయండి',quickReminders:'నా రిమైండర్లు చూపండి',quickProgress:'నేను ఎలా చేశాను?',quickHelp:'మీరు ఏమి చేయగలరు?',context:'నా తాజా MINDMATE కార్యకలాపాన్ని ఉపయోగించు',clear:'తుడిచివేయి'},
+  kn:{title:'🤖 MINDMATE AI ಏಜೆಂಟ್',subtitle:'ಜ್ಞಾನಾತ್ಮಕ ಚಟುವಟಿಕೆಗಳು, ದಿನಚರಿ, ಜ್ಞಾಪನೆಗಳು ಮತ್ತು ಆರೈಕೆ ಸಹಾಯಕ್ಕಾಗಿ ನಿಮ್ಮ ವೈಯಕ್ತಿಕ ಏಜೆಂಟ್.',placeholder:'MINDMATE ಅನ್ನು ಏನಾದರೂ ಕೇಳಿ…',send:'ಕಳುಹಿಸಿ',thinking:'ಚಿಂತಿಸುತ್ತಿದೆ…',offline:'ಆಫ್‌ಲೈನ್ — ಸ್ಥಳೀಯ ಸಹಾಯ ಲಭ್ಯ',ready:'ಸಿದ್ಧ',connected:'n8n ಏಜೆಂಟ್‌ಗೆ ಸಂಪರ್ಕಿಸಲಾಗಿದೆ',unavailable:'n8n ಏಜೆಂಟ್ ಲಭ್ಯವಿಲ್ಲ. ಸ್ಥಳೀಯ ಸಹಾಯ ಬಳಸಲಾಗುತ್ತಿದೆ.',welcome:'ನಮಸ್ಕಾರ. ನಾನು ನಿಮ್ಮ MINDMATE AI ಏಜೆಂಟ್. ಇಂದಿನ ಪ್ರಯಾಣ, ಜ್ಞಾಪನೆಗಳು, ಪ್ರಗತಿ, ದಿನಚರಿ ಮತ್ತು ಆರೈಕೆ ಸಾರಾಂಶಗಳಲ್ಲಿ ಸಹಾಯ ಮಾಡಬಹುದು.',quickJourney:'ನನ್ನ ಪ್ರಯಾಣವನ್ನು ಯೋಜಿಸಿ',quickReminders:'ಜ್ಞಾಪನೆಗಳನ್ನು ತೋರಿಸಿ',quickProgress:'ನಾನು ಹೇಗೆ ಮಾಡಿದೆ?',quickHelp:'ನೀವು ಏನು ಮಾಡಬಹುದು?',context:'ನನ್ನ ಇತ್ತೀಚಿನ MINDMATE ಚಟುವಟಿಕೆಯನ್ನು ಬಳಸಿ',clear:'ಅಳಿಸಿ'},
+  as:{title:'🤖 MINDMATE AI এজেণ্ট',subtitle:'জ্ঞানমূলক কাৰ্যকলাপ, দৈনন্দিন ৰুটিন, সোঁৱৰনি আৰু যত্ন সহায়ৰ বাবে আপোনাৰ ব্যক্তিগত এজেণ্ট।',placeholder:'MINDMATE-ক কিবা সুধক…',send:'পঠিয়াওক',thinking:'ভাৱি আছে…',offline:'অফলাইন — স্থানীয় সহায় উপলব্ধ',ready:'প্ৰস্তুত',connected:'n8n এজেণ্টৰ সৈতে সংযুক্ত',unavailable:'n8n এজেণ্ট উপলব্ধ নহয়। স্থানীয় সহায় ব্যৱহাৰ কৰা হৈছে।',welcome:'নমস্কাৰ। মই আপোনাৰ MINDMATE AI এজেণ্ট। আজিৰ যাত্ৰা, সোঁৱৰনি, অগ্ৰগতি, ৰুটিন আৰু যত্নদাতা সাৰাংশত সহায় কৰিব পাৰোঁ।',quickJourney:'মোৰ যাত্ৰা পৰিকল্পনা কৰক',quickReminders:'সোঁৱৰনিবোৰ দেখুৱাওক',quickProgress:'মই কেনেকুৱা কৰিলোঁ?',quickHelp:'আপুনি কি কৰিব পাৰে?',context:'মোৰ সাম্প্ৰতিক MINDMATE কাৰ্যকলাপ ব্যৱহাৰ কৰক',clear:'পৰিষ্কাৰ'},
+  brx:{title:'🤖 MINDMATE AI एजेन्ट',subtitle:'बुद्दि खामानि, दिननि आदाब, सोरखि आरो जाउगानिनि मददनि थाखाय नोंनि निजारि एजेन्ट।',placeholder:'MINDMATE खौ खिन्था जों…',send:'दां',thinking:'सुस्रां दं…',offline:'अफलाइन — थानाय मदद मोननो हायो',ready:'फोजों',connected:'n8n एजेन्टजों जाबोदों',unavailable:'n8n एजेन्ट मोननो हायाखै। थानाय मददखौ बाहायनाय जादों।',welcome:'नमस्कार। आं नोंनि MINDMATE AI एजेन्ट। आजनि जर्नी, सोरखि, प्रगति आरो रुटिननि मदद होनो हायो।',quickJourney:'आंनि जर्निखौ साजाय',quickReminders:'सोरखि देखाय',quickProgress:'आं माबोरै खामानाय?',quickHelp:'नों माबोरै मदद होनो हागोन?',context:'आंनि नायजोबनि MINDMATE खामानिखौ बाहाय',clear:'सुफा'},
+  mni:{title:'🤖 MINDMATE AI এজেন্ট',subtitle:'মস্তিষ্কীয় কাৰ্য, দৈনিক ৰুটিন, সোঁৱৰণি আৰু যত্ন সহায়ৰ বাবে আপোনাৰ ব্যক্তিগত এজেন্ট।',placeholder:'MINDMATE লৈ কিবা সোধক…',send:'পঠাওক',thinking:'চিন্তা কৰি আছে…',offline:'অফলাইন — স্থানীয় সহায় উপলব্ধ',ready:'সাজু',connected:'n8n এজেন্টৰ সৈতে সংযুক্ত',unavailable:'n8n এজেন্ট উপলব্ধ নহয়। স্থানীয় সহায় ব্যৱহাৰ কৰা হৈছে।',welcome:'নমস্কাৰ। মই আপোনাৰ MINDMATE AI এজেন্ট। আজিৰ যাত্ৰা, সোঁৱৰণি, অগ্ৰগতি আৰু যত্নদাতা সাৰাংশত সহায় কৰিব পাৰোঁ।',quickJourney:'মোৰ যাত্ৰা সাজু কৰক',quickReminders:'সোঁৱৰণি দেখুৱাওক',quickProgress:'মই কেনেকুৱা কৰিলোঁ?',quickHelp:'আপুনি কি কৰিব পাৰে?',context:'মোৰ শেহতীয়া MINDMATE কাৰ্যকলাপ ব্যৱহাৰ কৰক',clear:'পৰিষ্কাৰ'},
+  lus:{title:'🤖 MINDMATE AI Agent',subtitle:'I cognitive activities, routine, reminders leh caregiver support atan i personal agent.',placeholder:'MINDMATE hnenah zawt rawh…',send:'Thawn',thinking:'A ngaihtuah mek…',offline:'Offline — local support a awm',ready:'A inpeih',connected:'n8n agent nen a inpeih',unavailable:'n8n agent hman theih lo. Local support hman mek.',welcome:'Chibai. MINDMATE AI Agent ka ni. Tuni journey, reminders, progress leh routine ah ka tanpui thei.',quickJourney:'Ka journey ruat rawh',quickReminders:'Reminders min entir rawh',quickProgress:'Engtin nge ka tih?',quickHelp:'Eng nge i tih theih?',context:'Ka MINDMATE activity hnuhnung ber hmang rawh',clear:'Paih'},
+  kha:{title:'🤖 MINDMATE AI Agent',subtitle:'Ka agent jong phi na ka cognitive activities, routine, reminders bad jingïarap ïa ki caregiver.',placeholder:'Kylli ïa MINDMATE…',send:'Phah',thinking:'Aiñ pyrkhat…',offline:'Offline — ka jingïarap shnong ka don',ready:'La pynkhreh',connected:'La pynïasoh bad n8n agent',unavailable:'n8n agent ym lah ban ïoh. Ka jingïarap shnong ka pyndonkam.',welcome:'Khublei. Nga long u MINDMATE AI Agent. Nga lah ban ïarap ha ka journey mynta ka sngi, reminders, progress bad routine.',quickJourney:'Pynkhreh ïa ka journey jong nga',quickReminders:'Pyni ïa ki reminders',quickProgress:'Kumno nga la leh?',quickHelp:'Kaei kaba phi lah ban leh?',context:'Pyndonkam ïa ka MINDMATE activity kaba dang shen',clear:'Pynkhuid'}
+};
+
+function currentAgentLanguage(){
+  return localStorage.getItem('mindmateLanguage') || 'en';
+}
+function at(key){
+  const lang=currentAgentLanguage();
+  return (agentText[lang] && agentText[lang][key]) || agentText.en[key];
+}
+function addAgentMessage(textContent, role){
+  const log=document.getElementById('agentChatLog');
+  if(!log) return;
+  const bubble=document.createElement('div');
+  bubble.className='agent-bubble '+(role==='user'?'user':'assistant');
+  bubble.textContent=textContent;
+  log.appendChild(bubble);
+  log.scrollTop=log.scrollHeight;
+}
+function agentContext(){
+  const ctx={
+    language:currentAgentLanguage(),
+    page:document.querySelector('.page.active')?.id||'home',
+    journey:window.mindmateJourneyState||null,
+    score:document.getElementById('score')?.textContent||null,
+    streak:document.getElementById('streak')?.textContent||null,
+    reminderCount:document.getElementById('todayReminderCount')?.textContent||null,
+    online:navigator.onLine
+  };
+  return ctx;
+}
+function localAgentReply(message){
+  const m=message.toLowerCase();
+  const ctx=agentContext();
+  if(/journey|यात्रा|பயணம்|യാത്ര|ప్రయాణ|ಪ್ರಯಾಣ|journey/.test(m)) return at('quickJourney')+'. '+(ctx.journey?'Your current journey is loaded from MINDMATE.':'Open My Journey to begin today’s activities.');
+  if(/remind|reminder|நினைவூ|रिमाइंड|ഓർമ്മ|రిమైండ|ಜ್ಞಾಪ|সোঁৱৰ|সোরখি|reminders/.test(m)) return at('quickReminders')+'. '+(ctx.reminderCount||'0')+' reminders are available today.';
+  if(/score|progress|performance|how did|எப்படி|कैसा|എങ്ങനെ|ఎలా|ಹೇಗೆ|অগ্ৰগতি/.test(m)) return at('quickProgress')+'. Current activity score: '+(ctx.score||'—')+'.';
+  return at('welcome')+' '+at('context')+'.';
+}
+async function sendToN8n(message){
+  const payload={
+    event:'agent_message',
+    message,
+    language:currentAgentLanguage(),
+    context:agentContext(),
+    source:'mindmate-web'
+  };
+  const controller=new AbortController();
+  const timeout=setTimeout(()=>controller.abort(),9000);
+  try{
+    const res=await fetch(N8N_AGENT_WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:controller.signal});
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const data=await res.json();
+    const reply=data.recommendation||data.response||data.output||data.message||data.text;
+    if(!reply) throw new Error('Empty agent response');
+    return {reply:String(reply),connected:true};
+  }catch(err){
+    return {reply:localAgentReply(message),connected:false};
+  }finally{clearTimeout(timeout);}
+}
+async function sendAgentMessage(messageOverride){
+  const input=document.getElementById('agentInput');
+  const message=(messageOverride||input?.value||'').trim();
+  if(!message) return;
+  if(input && !messageOverride) input.value='';
+  addAgentMessage(message,'user');
+  const status=document.getElementById('agentStatus');
+  if(status){status.textContent=at('thinking');status.dataset.state='thinking';}
+  const result=await sendToN8n(message);
+  addAgentMessage(result.reply,'assistant');
+  if(status){status.textContent=result.connected?at('connected'):at('unavailable');status.dataset.state=result.connected?'connected':'offline';}
+}
+function refreshAgentLanguage(){
+  const map={title:'agentTitle',subtitle:'agentSubtitle',placeholder:'agentInput',send:'agentSend',clear:'agentClear'};
+  Object.keys(map).forEach(key=>{
+    const el=document.getElementById(map[key]); if(!el) return;
+    if(key==='placeholder') el.placeholder=at(key); else el.textContent=at(key);
+  });
+  document.querySelectorAll('[data-agent-quick]').forEach(el=>{
+    el.textContent=at(el.dataset.agentQuick);
+  });
+  const status=document.getElementById('agentStatus');
+  if(status && status.dataset.state!=='thinking') status.textContent=navigator.onLine?at('ready'):at('offline');
+}
+function clearAgentChat(){
+  const log=document.getElementById('agentChatLog');
+  if(log) log.replaceChildren();
+  addAgentMessage(at('welcome'),'assistant');
+}
+function initAgent(){
+  const send=document.getElementById('agentSend');
+  const input=document.getElementById('agentInput');
+  const clear=document.getElementById('agentClear');
+  if(!send||!input) return;
+  send.addEventListener('click',()=>sendAgentMessage());
+  input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendAgentMessage();}});
+  clear?.addEventListener('click',clearAgentChat);
+  document.querySelectorAll('[data-agent-quick]').forEach(el=>el.addEventListener('click',()=>sendAgentMessage(at(el.dataset.agentQuick))));
+  window.addEventListener('mindmate:languageChanged',refreshAgentLanguage);
+  window.addEventListener('online',refreshAgentLanguage);
+  window.addEventListener('offline',refreshAgentLanguage);
+  refreshAgentLanguage();
+  clearAgentChat();
+}
+window.mindmateAgent={send:sendAgentMessage,refresh:refreshAgentLanguage};
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initAgent,{once:true}); else initAgent();

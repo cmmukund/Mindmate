@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-key="site_title">MINDMATE - SIH 26003</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#17324D">
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+<header class="app-header">
+  <div class="header-inner">
+    <div class="brand" aria-label="MINDMATE">
+      <div class="brand-mark" aria-hidden="true">🧠</div>
+      <div>
+        <div class="brand-name">MINDMATE</div>
+        <span class="brand-sub" data-key="brand_sub">Your cognitive care companion</span>
+      </div>
+    </div>
+    <nav class="main-nav" data-i18n-aria="main_navigation" aria-label="Main navigation">
+      <button data-key="nav_home" onclick="showPage('home')">Home</button>
+      <button data-key="nav_games" onclick="showPage('games')">Brain Games</button>
+      <button data-key="nav_journey" onclick="showPage('journey')">My Journey</button>
+      <button data-key="nav_reminders" onclick="showPage('reminders')">Reminders</button>
+      <button data-key="nav_dashboard" onclick="showPage('dashboard')">My Progress</button>
+      <button data-key="nav_caregiver" onclick="showPage('caregiver')">Caregiver</button>
+      <button data-key="nav_healthworker" onclick="showPage('healthworker')">Health Worker</button>
+      <div class="language-wrap">
+        <span aria-hidden="true">🌐</span>
+        <select id="languageSelector" data-i18n-aria="language_label" aria-label="Choose language" onchange="changeLanguage(this.value)">
+          <option value="en" data-key="language_english">English</option>
+          <option value="ta" data-key="language_tamil">தமிழ்</option>
+          <option value="hi" data-key="language_hindi">हिन्दी</option>
+          <option value="ml" data-key="language_malayalam">മലയാളം</option>
+          <option value="te" data-key="language_telugu">తెలుగు</option>
+          <option value="kn" data-key="language_kannada">ಕನ್ನಡ</option>
+          <option value="as" data-key="language_assamese">অসমীয়া</option>
+          <option value="brx" data-key="language_bodo">बर'</option>
+          <option value="mni" data-key="language_meitei">মৈতৈলোন</option>
+          <option value="lus" data-key="language_mizo">Mizo</option>
+          <option value="kha" data-key="language_khasi">Khasi</option>
+        </select>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<div class="medical-disclaimer-banner" role="note">
+  <div class="container">
+    <span>ℹ️ <strong>MINDMATE Health Notice:</strong> MINDMATE provides cognitive engagement, routine support, and activity insights. It is not a medical diagnostic system and does not replace professional medical assessment.</span>
+  </div>
+</div>
+
+<section class="ner-context-banner" aria-label="North Eastern Region focus">
+  <div class="container">
+    <strong>Built for the North Eastern Region</strong>
+    <span>Offline-friendly cognitive engagement, regional-language support, and simple caregiver awareness for elders in remote communities.</span>
+  </div>
+</section>
+
+<section id="home" class="page active">
+  <div class="container">
+    <div class="hero">
+      <div>
+        <div class="eyebrow" data-key="eyebrow">🌿 Simple. Supportive. Personal.</div>
+        <h1 data-key="welcome">Welcome to MINDMATE</h1>
+        <p data-key="subtitle">Smart Cognitive Care and Family Support Platform</p>
+        <div class="hero-actions">
+          <button class="btn large" data-key="hero_start" onclick="showPage('journey')">🧭 Start Today's Journey</button>
+          <button class="btn secondary large" data-key="talk_mindmate" onclick="document.getElementById('agentBox').scrollIntoView({behavior:'smooth'})">🤖 Talk to MINDMATE AI</button>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="big-icon">🤝</div>
+        <h2 data-key="one_step">One step at a time</h2>
+        <p data-key="one_step_desc">Play a short activity, check your reminders, or talk with MINDMATE. You don't need to learn a complicated app.</p>
+      </div>
+    </div>
+
+    <div class="section-head">
+      <h2 data-key="checkin_title">Today's simple check-in</h2>
+      <p data-key="checkin_desc">Everything important is kept in one place.</p>
+    </div>
+    <div class="status-row" data-i18n-aria="todays_status" aria-label="Today's status">
+      <div class="status-card"><div class="status-icon">💊</div><div><strong data-key="medicine_label">Medicine</strong><span data-key="time_8am">8:00 AM</span></div></div>
+      <div class="status-card"><div class="status-icon">💧</div><div><strong data-key="water_label">Water</strong><span data-key="time_10am">10:00 AM</span></div></div>
+      <div class="status-card"><div class="status-icon">🧠</div><div><strong data-key="brain_activity_label">Brain activity</strong><span data-key="time_6pm">6:00 PM</span></div></div>
+      <div class="status-card"><div class="status-icon">📴</div><div><strong data-key="offline_ready">Offline ready</strong><span data-key="saved_device">Saved on device</span></div></div>
+    </div>
+
+    <div class="section-head">
+      <h2 data-key="what_do">What would you like to do?</h2>
+      <p data-key="choose_action">Choose one simple action.</p>
+    </div>
+
+    <section class="panel ner-story" aria-labelledby="nerStoryTitle">
+      <span class="goal">SIH26003 · NORTH EASTERN REGION</span>
+      <h2 id="nerStoryTitle">Support that stays useful when connectivity does not</h2>
+      <p>Designed for elders and families facing language diversity, limited connectivity, and distance from specialist care. Activities, reminders, and recent progress remain available on the device.</p>
+      <div class="ner-pill-row"><span>📴 Local-first</span><span>🗣️ Regional-language ready</span><span>👨‍👩‍👧 Caregiver awareness</span><span>🧓 Elder-friendly</span></div>
+    </section>
+    <div class="action-grid">
+      <article class="action-card">
+        <div><div class="action-icon">🧠</div><h3 data-key="play_game">Play a Game</h3><p data-key="play_game_desc">Short memory activities designed to be easy to follow.</p></div>
+        <button class="btn large" data-key="play_game" onclick="showPage('games')">Play a Game</button>
+      </article>
+      <article class="action-card">
+        <div><div class="action-icon agent-icon">🤖</div><h3 data-key="agent_home_title">MINDMATE Guide</h3><p data-key="agent_home_desc">A simple way to get help with your day.</p></div>
+        <button class="btn large" data-key="agent_home_button" onclick="document.getElementById('agentBox').scrollIntoView({behavior:'smooth'})">Open MINDMATE Guide</button>
+      </article>
+      <article class="action-card">
+        <div><div class="action-icon">⏰</div><h3 data-key="my_reminders">My Reminders</h3><p data-key="my_reminders_desc">See today's medicine, water, and brain-activity reminders.</p></div>
+        <button class="btn large" data-key="my_reminders" onclick="showPage('reminders')">My Reminders</button>
+      </article>
+    </div>
+
+    <section class="guide-panel" id="agentBox" aria-labelledby="agentTitle">
+      <div class="guide-top">
+        <div class="guide-welcome">
+          <div class="guide-avatar" aria-hidden="true">🧓</div>
+          <div>
+            <div class="eyebrow guide-eyebrow">🌿 <span id="agentEyebrow">MINDMATE GUIDE</span></div>
+            <h2 id="agentTitle">MINDMATE Guide</h2>
+            <p id="agentSubtitle" class="guide-subtitle">A simple helper for your day.</p>
+          </div>
+        </div>
+        <span id="agentStatus" class="agent-status" data-state="ready">Ready</span>
+      </div>
+
+      <div class="guide-question" id="agentPrompt">What would you like help with?</div>
+
+      <div class="guide-actions" aria-label="MINDMATE help options">
+        <button class="guide-action action-journey" type="button" data-agent-quick="quickJourney" data-agent-intent="journey">
+          <span class="guide-action-icon">🧭</span>
+          <span><strong id="journeyActionTitle">Today's Journey</strong><small id="journeyActionSub">Start or continue</small></span>
+        </button>
+        <button class="guide-action action-reminders" type="button" data-agent-quick="quickReminders" data-agent-intent="reminders">
+          <span class="guide-action-icon">⏰</span>
+          <span><strong id="remindersActionTitle">My Reminders</strong><small id="remindersActionSub">See what is due</small></span>
+        </button>
+        <button class="guide-action action-progress" type="button" data-agent-quick="quickProgress" data-agent-intent="progress">
+          <span class="guide-action-icon">📈</span>
+          <span><strong id="progressActionTitle">My Progress</strong><small id="progressActionSub">See how I did</small></span>
+        </button>
+        <button class="guide-action action-help" type="button" data-agent-quick="quickHelp" data-agent-intent="help">
+          <span class="guide-action-icon">💬</span>
+          <span><strong id="helpActionTitle">Ask MINDMATE</strong><small id="helpActionSub">Get simple help</small></span>
+        </button>
+      </div>
+
+      <div class="guide-chat-wrap">
+        <div class="guide-chat-title"><span>💙 MINDMATE</span><span id="agentContextHint">Here to help</span></div>
+        <div class="agent-chat guide-chat" id="agentChatLog" aria-live="polite"></div>
+      </div>
+
+      <div class="guide-input-card">
+        <label id="agentInputLabel" for="agentInput">Or type your question</label>
+        <div class="agent-input-row">
+          <input id="agentInput" type="text" autocomplete="off" placeholder="For example: What do I do next?" aria-label="Ask MINDMATE">
+          <button class="guide-send" id="agentSend" type="button"><span aria-hidden="true">➤</span><span id="agentSendLabel">Send</span></button>
+        </div>
+      </div>
+
+      <div class="guide-footer">
+        <span id="agentFooterNote">Simple help for activities, reminders and routines.</span>
+        <button class="guide-clear" id="agentClear" type="button">Clear</button>
+      </div>
+    </section>
+
+    <div class="profile-card">
+      <h2 data-key="profile_title">👤 My Profile</h2>
+      <p class="panel-sub" data-key="profile_desc">Keep your basic details and family contacts available on this device.</p>
+      <div class="profile-layout">
+        <div class="profile-side">
+          <img id="profileImage" class="profile-photo" data-i18n-alt="profile_photo_alt" alt="Profile photo"
+               src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='130' height='130'%3E%3Crect width='100%25' height='100%25' fill='%23eef3f8'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='50'%3E👤%3C/text%3E%3C/svg%3E">
+          <label class="file-label" data-key="change_photo">📷 Change photo
+            <input type="file" id="profileUpload" accept="image/*" onchange="uploadProfilePhoto(event)">
+          </label>
+        </div>
+        <div>
+          <div class="form-grid">
+            <div class="field"><label for="nameInput" data-key="lbl_name">Name</label><input id="nameInput" data-key-placeholder="ph_name" placeholder="Enter your name"></div>
+            <div class="field"><label for="ageInput" data-key="lbl_age">Age</label><input id="ageInput" type="number" data-key-placeholder="ph_age" placeholder="Enter your age"></div>
+            <div class="field"><label for="emergencyInput" data-key="lbl_emergency">Emergency contact</label><input id="emergencyInput" data-key-placeholder="ph_emergency" placeholder="Emergency contact"></div>
+            <div class="field"><label for="caregiverInput" data-key="lbl_caregiver_name">Caregiver name</label><input id="caregiverInput" data-key-placeholder="ph_caregiver_name" placeholder="Caregiver name"></div>
+            <div class="field"><label for="relationshipInput" data-key="lbl_relationship">Relationship</label><input id="relationshipInput" data-key-placeholder="ph_relationship" placeholder="Relationship"></div>
+            <div class="field"><label for="cityInput" data-key="lbl_city">City</label><input id="cityInput" data-key-placeholder="ph_city" placeholder="City"></div>
+          </div>
+          <div class="form-actions">
+            <button class="btn" data-key="btn_save_profile" onclick="saveProfile()">💾 Save Profile</button>
+            <button class="btn secondary" data-key="btn_load_profile" onclick="loadProfile()">🔄 Load Profile</button>
+          </div>
+          <div id="profileDisplay"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-card">
+      <h2 data-key="family_title">👨‍👩‍👧‍👦 Family Members</h2>
+      <p class="panel-sub" data-key="family_desc">Familiar faces can make the experience more personal.</p>
+      <div class="family-grid">
+        <div class="family-member">
+          <img id="fatherPhoto" alt="Father">
+          <h3 data-key="lbl_father">Father</h3>
+          <input id="fatherName" data-key-placeholder="ph_father_name" placeholder="Father name">
+          <input type="file" accept="image/*" onchange="uploadFamilyPhoto(event,'fatherPhoto')">
+        </div>
+        <div class="family-member">
+          <img id="motherPhoto" alt="Mother">
+          <h3 data-key="lbl_mother">Mother</h3>
+          <input id="motherName" data-key-placeholder="ph_mother_name" placeholder="Mother name">
+          <input type="file" accept="image/*" onchange="uploadFamilyPhoto(event,'motherPhoto')">
+        </div>
+        <div class="family-member">
+          <img id="daughterPhoto" alt="Daughter">
+          <h3 data-key="lbl_daughter">Daughter</h3>
+          <input id="daughterName" data-key-placeholder="ph_daughter_name" placeholder="Daughter name">
+          <input type="file" accept="image/*" onchange="uploadFamilyPhoto(event,'daughterPhoto')">
+        </div>
+        <div class="family-member">
+          <img id="sonPhoto" alt="Son">
+          <h3 data-key="lbl_son">Son</h3>
+          <input id="sonName" data-key-placeholder="ph_son_name" placeholder="Son name">
+          <input type="file" accept="image/*" onchange="uploadFamilyPhoto(event,'sonPhoto')">
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn" data-key="btn_save_family" onclick="saveFamily()">💾 Save Family Details</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="journey" class="page">
+  <div class="container">
+    <div class="page-title">
+      <div><h1>🧭 My Cognitive Journey</h1><p>One short, personalized session built from your recent activity.</p></div>
+      <button class="btn secondary" onclick="showPage('home')">← Home</button>
+    </div>
+    <div class="journey-hero panel">
+      <div><span class="goal" id="journeyGoal">PERSONALIZED</span><h1 id="journeyTitle">My Cognitive Journey</h1><h2 id="journeyGreeting">Good morning</h2><p id="journeyAdaptiveSummary">Your journey adapts activity order and difficulty from your recent performance.</p><p id="journeySummary">One short, personalized session built from your recent activity.</p></div>
+      <button class="btn large" id="startJourneyBtn" type="button">▶ Start 10-minute Journey</button>
+    </div>
+    <div class="journey-grid" id="journeyPlan"></div>
+    <div class="panel journey-session" id="journeySession" hidden>
+      <div class="session-head"><div><span class="goal" id="sessionCategory">MEMORY</span><h2 id="sessionTitle">Activity</h2><p id="sessionInstruction">Follow the instruction.</p></div><div class="session-progress"><strong id="sessionStep">1 / 5</strong></div></div>
+      <div id="taskArea"></div>
+      <div class="game-actions"><button class="btn secondary" id="skipTaskBtn" type="button">Skip</button><button class="btn" id="submitTaskBtn" type="button">Check</button></div>
+      <div class="insight" id="adaptationInsight" hidden></div>
+    </div>
+  </div>
+</section>
+
+<section id="healthworker" class="page">
+  <div class="container">
+    <div class="page-title">
+      <div>
+        <h1>🩺 Health Worker & Clinical Support View</h1>
+        <p>Permission-limited activity performance, routine telemetry, and synchronization audit.</p>
+      </div>
+      <button class="btn secondary" onclick="showPage('home')">← Patient view</button>
+    </div>
+    <div class="panel">
+      <h2>Longitudinal Telemetry & Routine Summary</h2>
+      <p class="panel-sub">Strictly non-diagnostic engagement records. Does not replace professional clinical assessment.</p>
+      <div class="metric-grid" id="healthMetrics"></div>
+      
+      <div class="section-head" style="margin-top:28px;">
+        <h3>Cognitive Domain Telemetry (Response Latency & Baseline Trend)</h3>
+        <p>Monitors activity consistency across the 5 engagement categories.</p>
+      </div>
+      <div class="metric-grid" id="healthDomainBreakdown"></div>
+
+      <div class="demo-note non-medical-statement" style="margin-top:24px;">
+        MINDMATE provides cognitive engagement, routine support, and activity insights. It is not a medical diagnostic system and does not replace professional medical assessment.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="games" class="page">
+  <div class="container">
+    <div class="page-title">
+      <div><h1 data-key="games_title">🧠 Brain Games</h1><p data-key="games_desc">Short activities for memory and recognition.</p></div>
+      <button class="btn secondary" data-key="home" onclick="showPage('home')">← Home</button>
+    </div>
+    <div class="game-grid">
+      <div class="game-box">
+        <span class="goal" data-key="memory_goal">MEMORY</span>
+        <h2 data-key="memory_seq_title">🔢 Memory Sequence</h2>
+        <p data-key="memory_seq_desc">Remember the number sequence.</p>
+        <div class="game-instruction" id="gameResult" data-key="game_instruction_seq" aria-live="polite">Press Start, remember the number, then enter it.</div>
+        <div id="sequence" class="sequence" data-key="press_start">Press Start</div>
+        <div class="game-actions">
+          <button class="btn large" data-key="btn_start_game" onclick="startMemoryGame()">Start Game</button>
+        </div>
+        <input id="gameInput" data-key-placeholder="ph_enter_sequence" placeholder="Enter sequence" data-i18n-aria="aria_enter_number" aria-label="Enter the remembered number">
+        <button class="btn" data-key="btn_check_answer" onclick="checkAnswer()">Check Answer</button>
+      </div>
+
+      <div class="game-box">
+        <span class="goal" data-key="recognition_goal">RECOGNITION</span>
+        <h2 data-key="object_memory_title">🧩 Object Memory</h2>
+        <p data-key="object_memory_desc">Remember these objects.</p>
+        <div class="game-instruction" id="objectResult" data-key="object_instruction" aria-live="polite">Press Start and remember the objects.</div>
+        <div id="objects" class="sequence" data-key="object_memory_list" style="font-size:26px;letter-spacing:1px">Apple · Book · Clock</div>
+        <div class="game-actions">
+          <button class="btn large" data-key="btn_start_object_game" onclick="startObjectGame()">Start Object Game</button>
+        </div>
+        <input id="objectInput" data-key-placeholder="ph_enter_objects" placeholder="Enter the objects" data-i18n-aria="aria_enter_objects" aria-label="Enter the remembered objects">
+        <button class="btn" data-key="btn_check_answer" onclick="checkObjectAnswer()">Check Answer</button>
+      </div>
+    </div>
+    <div class="demo-note" data-key="demo_games">Prototype note: the current score and game logic are demonstration mechanisms. They are not a clinical diagnosis or validated cognitive assessment.</div>
+  </div>
+</section>
+
+<section id="reminders" class="page">
+  <div class="container">
+    <div class="page-title">
+      <div><h1 data-key="reminders_title">⏰ Reminders</h1><p data-key="reminders_desc">Simple prompts for today's routine.</p></div>
+      <button class="btn secondary" data-key="home" onclick="showPage('home')">← Home</button>
+    </div>
+    <div class="reminder-grid">
+      <div class="reminder"><div class="reminder-icon">💊</div><div><h3 data-key="medicine_time">8:00 AM · Medicine</h3><p data-key="reminder_medicine">Medicine reminder</p></div></div>
+      <div class="reminder"><div class="reminder-icon">💧</div><div><h3 data-key="water_time">10:00 AM · Water</h3><p data-key="reminder_water">Drink water</p></div></div>
+      <div class="reminder"><div class="reminder-icon">🧠</div><div><h3 data-key="brain_time">6:00 PM · Brain activity</h3><p data-key="reminder_brain">Brain exercise</p></div></div>
+      <div class="reminder"><div class="reminder-icon">📅</div><div><h3 data-key="appointment">Appointment</h3><p data-key="appointment_desc">Keep upcoming medical appointments easy to remember.</p></div></div>
+    </div>
+    <div class="reminder-tools">
+      <button class="btn large" id="addReminderBtn" data-key="add_reminder" type="button" onclick="toggleReminderForm()">➕ Add Reminder</button>
+    </div>
+    <div class="custom-reminder-form" id="customReminderForm" aria-live="polite">
+      <h2 data-key="custom_reminders">Custom reminders</h2>
+      <div class="form-grid">
+        <div class="field">
+          <label for="customReminderTitle" data-key="reminder_title_label">Reminder title</label>
+          <input id="customReminderTitle" data-key-placeholder="reminder_title_placeholder" placeholder="Enter reminder name" maxlength="80">
+        </div>
+        <div class="field">
+          <label for="customReminderTime" data-key="reminder_time_label">Time</label>
+          <input id="customReminderTime" type="time">
+        </div>
+      </div>
+      <div class="custom-reminder-actions">
+        <button class="btn green" data-key="save_reminder" type="button" onclick="saveCustomReminder()">💾 Save Reminder</button>
+        <button class="btn secondary" data-key="cancel" type="button" onclick="toggleReminderForm(false)">Cancel</button>
+      </div>
+    </div>
+    <div class="custom-reminder-list" id="customReminderList"></div>
+    <div class="demo-note" data-key="reminder_demo">Reminder content shown here is part of the current prototype. Full scheduled notifications and completion syncing are not claimed unless implemented by the application.</div>
+  </div>
+</section>
+
+<section id="dashboard" class="page">
+  <div class="container">
+    <div class="page-title">
+      <div>
+        <h1 data-key="dashboard_title">📊 My Progress & Baselines</h1>
+        <p data-key="dashboard_desc">Your personal activity performance, trends, and routine consistency.</p>
+      </div>
+      <button class="btn secondary" data-key="practice_now" onclick="showPage('games')">🧠 Practice Now</button>
+    </div>
+
+    <div class="metric-grid">
+      <div class="metric"><div class="metric-label" data-key="cognitive_activity">🧠 Activity Performance</div><p class="stat" id="score">Baseline pending</p><small>Composite Activity Score</small></div>
+      <div class="metric"><div class="metric-label" data-key="current_streak">🔥 Current Streak</div><p class="stat" id="streak">0 Days</p><small data-key="lbl_daily_streak">Daily check-in streak</small></div>
+      <div class="metric"><div class="metric-label" data-key="card_correct_row">🎯 Consecutive Correct</div><p class="stat" id="correctStreak">0</p><small>In recent activities</small></div>
+      <div class="metric"><div class="metric-label" data-key="card_reminders">⏰ Reminder Adherence</div><p class="stat" data-v2-adherence>Checking…</p><small>Last 30 days completed</small></div>
+      <div class="metric"><div class="metric-label" data-key="card_offline_mode">📴 Sync Status</div><p class="stat" data-v2-sync>All synced</p><small>Local-first IndexedDB queue</small></div>
+    </div>
+
+    <div class="section-head" style="margin-top:32px;">
+      <h2>Personal Baselines Across 5 Cognitive Domains</h2>
+      <p>MINDMATE learns your individual baseline and highlights performance changes over time.</p>
+    </div>
+    <div class="metric-grid" id="patientBaselineGrid"></div>
+
+    <div class="dashboard-grid" style="margin-top:24px;">
+      <div class="panel">
+        <h2 data-key="performance_title">Recent Performance Trend</h2>
+        <p class="panel-sub" data-key="performance_desc">Overall activity consistency across completed tasks.</p>
+        <div class="progress" data-i18n-aria="performance_aria" aria-label="Performance"><div id="performanceBar" class="progress-bar"></div></div>
+        <div class="progress-caption"><span data-key="current_score">Current Level</span><strong id="performanceText">Baseline pending</strong></div>
+        <div class="insight"><strong data-key="keep_simple">Keep it simple.</strong><br><span data-key="keep_simple_desc">Regular, brief daily cognitive engagement supports positive routine confidence.</span></div>
+      </div>
+      <div class="panel">
+        <h2 data-key="todays_focus">Today's Routine Focus</h2>
+        <div class="alert-list">
+          <div class="alert normal"><div>✓</div><div><strong>Cognitive Journey Ready</strong><span>Complete today's 10-minute 5-domain session.</span></div></div>
+          <div class="alert normal"><div>✓</div><div><strong>Offline Storage Active</strong><span>All telemetry remains safely on your local device.</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="demo-note non-medical-statement">
+      Notice: MINDMATE provides cognitive engagement, routine support, and activity insights. It is not a medical diagnostic system and does not replace professional medical assessment.
+    </div>
+  </div>
+</section>
+
+<section id="caregiver" class="page">
+  <div class="container">
+    <div class="page-title">
+      <div>
+        <h1 data-key="caregiver_title">👨‍⚕️ Caregiver & Family Dashboard</h1>
+        <p data-key="caregiver_desc">Real-time awareness of daily activities, reminder adherence, and adaptive adjustments.</p>
+      </div>
+      <button class="btn secondary" data-key="patient_view" onclick="showPage('home')">← Patient view</button>
+    </div>
+
+    <div class="caregiver-top">
+      <h2 data-key="patient_overview">Patient Activity & Routine Overview</h2>
+      <p data-key="patient_overview_desc">Activity performance and adherence tracking recorded locally on this device.</p>
+    </div>
+
+    <div id="caregiverAttentionCard" class="insight" aria-live="polite"></div>
+
+    <div class="metric-grid">
+      <div class="metric"><div class="metric-label" data-key="cognitive_activity">🧠 Activity Performance</div><p class="stat" id="careScore">Baseline pending</p><small>Composite Activity Score</small></div>
+      <div class="metric"><div class="metric-label">💊 Medicine Adherence</div><p class="stat" id="careAdherenceStat">—</p><small>Taken vs scheduled</small></div>
+      <div class="metric"><div class="metric-label">🔥 Login Streak</div><p class="stat" id="careStreak">0 Days</p><small>Consecutive daily use</small></div>
+      <div class="metric"><div class="metric-label">📴 Sync Status</div><p class="stat" id="careSyncStat">Up to date</p><small>Local-first queue</small></div>
+    </div>
+
+    <div class="dashboard-grid" style="margin-top:24px;">
+      <div class="panel">
+        <h2>Adaptive Personalization Feed</h2>
+        <p class="panel-sub">Transparent reasons for difficulty adjustments across cognitive domains.</p>
+        <div data-v2-care-explanation></div>
+      </div>
+      <div class="panel">
+        <h2>Routine Alerts & Missed Reminders</h2>
+        <p class="panel-sub">Active alerts requiring attention or follow-up.</p>
+        <div id="caregiverMissedReminders"></div>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:24px;">
+      <h2>Recent Activity Sessions Telemetry</h2>
+      <p class="panel-sub">Recent session records showing response latency and completion status.</p>
+      <div id="caregiverRecentSessions"></div>
+    </div>
+
+    <div class="demo-note non-medical-statement" style="margin-top:20px;">
+      MINDMATE provides cognitive engagement, routine support, and activity insights. It is not a medical diagnostic system and does not replace professional medical assessment.
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p data-key="footer_line1">🧠 MINDMATE · Smart Cognitive Care & Family Support Platform</p>
+  <p class="footer-disclaimer-sub">MINDMATE is designed for cognitive engagement, routine support, and caregiver awareness. It is not a medical diagnostic tool.</p>
+</footer>
+
+<script src="js/app.js" defer></script>
+<script src="js/agent.js" defer></script>
+<script type="module" src="js/bootstrap.js"></script>
+</body>
+</html>
